@@ -1,0 +1,40 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# macOS stuff (important on your Mac)
+.DS_Store
+
+# IDE / editor files
+.vscode/
+.idea/
+
+# Tkinter / app runtime artifacts (if any)
+*.log
+
+# PyInstaller (since you’ve been using it)
+build/
+dist/
+*.spec
+*.app
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Database
+app/data/*.db
+app/data
+
+# Environment Variables
+*.env
+
+# Music Library
+app/resources/music/
+
