@@ -46,21 +46,27 @@ if file_path.name == "Uninstall.exe" and dir_path.name == APP_NAME:
                     shutil.rmtree(dir_path)
                 except Exception:
                     pass
-                batch_script = (
-                    "@echo off\n"
-                    + "timeout /t 2 >nul 2>nul\n"
-                    + f'powershell -Command "Start-Process cmd -ArgumentList \'/c rd /s /q \\"{str(dir_path)}\\"\' -Verb runAs"\n'
-                    + "timeout /t 1 >nul\n"
-                    + 'del "%~f0" >nul 2>nul'
-                )
-                batch_file = dir_path.parent / f"Uninstall_{APP_NAME}.bat"
-                with open(batch_file, "w") as f:
-                    f.write(batch_script)
                 messagebox.showinfo(
                     "SUCCESS",
                     f"{APP_NAME} was successfully uninstalled from your device\nThank you for using {APP_NAME}",
                 )
-                subprocess.Popen(batch_file, shell=True)
+                try:
+                    batch_script = (
+                        "@echo off\n"
+                        + "timeout /t 2 >nul 2>nul\n"
+                        + f'powershell -Command "Start-Process cmd -ArgumentList \'/c rd /s /q \\"{str(dir_path)}\\"\' -Verb runAs"\n'
+                        + "timeout /t 1 >nul\n"
+                        + 'del "%~f0" >nul 2>nul'
+                    )
+                    batch_file = dir_path.parent / f"Uninstall_{APP_NAME}.bat"
+                    with open(batch_file, "w") as f:
+                        f.write(batch_script)
+                    subprocess.Popen(str(batch_file), shell=True)
+                except Exception:
+                    messagebox.showwarning(
+                        "WARNING",
+                        f"{APP_NAME} was uninstalled, but cleanup script failed to run",
+                    )
         else:
             messagebox.showerror(
                 "ERROR",
