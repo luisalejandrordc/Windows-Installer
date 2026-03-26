@@ -1,0 +1,3 @@
+elevate
+pywin32
+ttkbootstrap
