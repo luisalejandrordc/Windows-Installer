@@ -87,7 +87,11 @@ def install():
         )""")
         cursor.execute(
             "INSERT INTO installation (install_dir, appdata_dir, dateCreated) VALUES (?, ?, ?)",
-            (install_dir, appdata_dir, datetime.now(timezone.utc).strftime(DT_FMT)),
+            (
+                str(install_dir),
+                str(appdata_dir),
+                datetime.now(timezone.utc).strftime(DT_FMT),
+            ),
         )
         conn.commit()
         conn.close()
