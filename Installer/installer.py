@@ -111,9 +111,9 @@ def install():
                     / "Programs"
                     / f"{APP_NAME}.lnk"
                 )
-                shortcut.TargetPath = exe_path
-                shortcut.WorkingDirectory = APP_NAME
-                shortcut.IconLocation = exe_path
+                shortcut.TargetPath = str(exe_path)
+                shortcut.WorkingDirectory = str(exe_path.parent)
+                shortcut.IconLocation = str(exe_path)
                 shortcut.save()
             except Exception:
                 messagebox.showerror(
@@ -131,9 +131,9 @@ def install():
                 shortcut = shell.CreateShortcut(
                     Path(os.environ["USERPROFILE"]) / "Desktop" / f"{APP_NAME}.lnk"
                 )
-                shortcut.TargetPath = exe_path
-                shortcut.WorkingDirectory = APP_NAME
-                shortcut.IconLocation = exe_path
+                shortcut.TargetPath = str(exe_path)
+                shortcut.WorkingDirectory = str(exe_path.parent)
+                shortcut.IconLocation = str(exe_path)
                 shortcut.save()
             except Exception:
                 messagebox.showerror(
@@ -153,9 +153,9 @@ def install():
         reg.SetValueEx(reg_key, "DisplayName", 0, reg.REG_SZ, APP_NAME)
         reg.SetValueEx(reg_key, "DisplayVersion", 0, reg.REG_SZ, APP_VERSION)
         reg.SetValueEx(reg_key, "Publisher", 0, reg.REG_SZ, DEVELOPER)
-        reg.SetValueEx(reg_key, "InstallLocation", 0, reg.REG_SZ, install_dir)
+        reg.SetValueEx(reg_key, "InstallLocation", 0, reg.REG_SZ, str(install_dir))
         reg.SetValueEx(reg_key, "UninstallString", 0, reg.REG_SZ, uninstall_string)
-        reg.SetValueEx(reg_key, "DisplayIcon", 0, reg.REG_SZ, exe_path)
+        reg.SetValueEx(reg_key, "DisplayIcon", 0, reg.REG_SZ, str(exe_path))
         reg.SetValueEx(reg_key, "Comments", 0, reg.REG_SZ, COMMENTS)
         reg.CloseKey(reg_key)
         progress_bar["value"] = 100
