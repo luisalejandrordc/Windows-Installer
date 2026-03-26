@@ -104,12 +104,14 @@ def install():
                 win.update_idletasks()
                 shell = Dispatch("WScript.Shell")
                 shortcut = shell.CreateShortcut(
-                    Path(os.environ["ProgramData"])
-                    / "Microsoft"
-                    / "Windows"
-                    / "Start Menu"
-                    / "Programs"
-                    / f"{APP_NAME}.lnk"
+                    str(
+                        Path(os.environ["ProgramData"])
+                        / "Microsoft"
+                        / "Windows"
+                        / "Start Menu"
+                        / "Programs"
+                        / f"{APP_NAME}.lnk"
+                    )
                 )
                 shortcut.TargetPath = str(exe_path)
                 shortcut.WorkingDirectory = str(exe_path.parent)
@@ -129,7 +131,7 @@ def install():
                 win.update_idletasks()
                 shell = Dispatch("WScript.Shell")
                 shortcut = shell.CreateShortcut(
-                    Path(os.environ["USERPROFILE"]) / "Desktop" / f"{APP_NAME}.lnk"
+                    str(Path(os.environ["USERPROFILE"]) / "Desktop" / f"{APP_NAME}.lnk")
                 )
                 shortcut.TargetPath = str(exe_path)
                 shortcut.WorkingDirectory = str(exe_path.parent)
