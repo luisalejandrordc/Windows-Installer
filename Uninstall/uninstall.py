@@ -76,4 +76,3 @@ else:
         "The name of some files or directories don't coincide with default ones, preventing the normal uninstallation process",
     )
 sys.exit()
-
