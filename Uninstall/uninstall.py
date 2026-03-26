@@ -6,6 +6,8 @@ import winreg as reg
 from pathlib import Path
 from tkinter import messagebox
 
+import winshell
+
 APP_NAME = "SongVibe"
 
 file_path = Path(sys.argv[0]).resolve()
@@ -36,9 +38,7 @@ if file_path.name == "Uninstall.exe" and dir_path.name == APP_NAME:
                 )
                 start_menu_shortcut.unlink(missing_ok=True)
                 # DESKTOP SHORTCUT
-                desktop_shortcut = (
-                    Path(os.environ["USERPROFILE"]) / "Desktop" / f"{APP_NAME}.lnk"
-                )
+                desktop_shortcut = Path(winshell.desktop()) / f"{APP_NAME}.lnk"
                 desktop_shortcut.unlink(missing_ok=True)
                 # APPDATA DIRECTORY
                 shutil.rmtree(Path(os.environ["LOCALAPPDATA"]) / APP_NAME)

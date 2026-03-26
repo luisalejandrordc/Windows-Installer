@@ -1,3 +1,4 @@
 elevate
 pywin32
 ttkbootstrap
+winshell

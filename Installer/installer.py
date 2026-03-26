@@ -8,6 +8,7 @@ from pathlib import Path
 from tkinter import filedialog, messagebox
 
 import ttkbootstrap as ttk
+import winshell
 from elevate import elevate
 from ttkbootstrap.constants import BOTH, END, FALSE, LEFT, RIGHT, TRUE, W, X
 from ttkbootstrap.style import ACTIVE, DETERMINATE, PRIMARY, READONLY, SUCCESS
@@ -131,7 +132,7 @@ def install():
                 win.update_idletasks()
                 shell = Dispatch("WScript.Shell")
                 shortcut = shell.CreateShortcut(
-                    str(Path(os.environ["USERPROFILE"]) / "Desktop" / f"{APP_NAME}.lnk")
+                    str(Path(winshell.desktop()) / f"{APP_NAME}.lnk")
                 )
                 shortcut.TargetPath = str(exe_path)
                 shortcut.WorkingDirectory = str(exe_path.parent)
